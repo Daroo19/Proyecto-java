@@ -1,4 +1,14 @@
-class servcio {
+let servicios =[{
+    id: 1,
+    title: "lavadero",
+    nombre: "lavado exterior",
+    precio: 3500,
+    img: "../Assets/Img/56a9f3d83ae58_thumb900.webp",
+}
+
+]
+
+/*class servcio {
     constructor (pn, servicio, descripcion, precio) {
         this.pn = pn;
         this.servicio = servicio;
@@ -75,4 +85,4 @@ do {
     respuesta = prompt("escribir 'LISTO' para finalizar su pedido o cualquier tecla agregar otro servicio").toUpperCase()
 } while (respuesta != "LISTO")
 
-alert("El total de los servicios a brindar es de $: " + seccionCompras.calcularTotal())
+alert("El total de los servicios a brindar es de $: " + seccionCompras.calcularTotal())*/
