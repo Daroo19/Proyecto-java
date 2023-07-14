@@ -1,90 +1,96 @@
-let servicios =[{
-    id: 11,
+let servicios = [{
+    id: 1,
     title: "lavadero",
     nombre: "Lavado Exterior",
     precio: 3500,
-    img: "./Assets/img/autolavado.jpg"
+    img: "./assets/img/autolavado.jpg"
 },
 {
-    id: 12,
+    id: 2,
     title: "lavadero",
     nombre: "Lavado Interior",
     precio: 3500,
-    img: "./Assets/img/autolavado.jpg" 
+    img: "./assets/img/autolavado.jpg"
 },
 {
-    id: 13,
+    id: 3,
     title: "lavadero",
     nombre: "Lavado Motor",
     precio: 2500,
-    img: "./Assets/img/limpiar-motor-coche.jpg"
+    img: "./assets/img/limpiar-motor-coche.jpg"
 },
 {
-    id: 14,
+    id: 4,
     title: "Mecanica",
     nombre: "Service Standard",
     precio: 9400,
-    img: "./Assets/img/Mecanicagen.jpg"  
+    img: "./assets/img/Mecanicagen.jpg"
 },
 {
-    id: 15,
+    id: 5,
     title: "Mecanica",
     nombre: "Tren Delantero",
     precio: 67000,
-    img: "./Assets/img/Mecanicagen.jpg" 
+    img: "./assets/img/Mecanicagen.jpg"
 },
 {
-    id: 16,
+    id: 6,
     title: "Mecanica",
     nombre: "Tren Trasero",
     precio: 53000,
-    img: "./Assets/img/Mecanicagen.jpg"
+    img: "./assets/img/Mecanicagen.jpg"
 },
 ]
 
 rendeProducts(servicios)
 function rendeProducts(listaServicios) {
-    let menuServicios = document.getElementById ("menuServicios")
+    let menuServicios = document.getElementById("menuServicios")
     menuServicios.innerHTML = ""
 
-        listaServicios.forEach(elem => {
+    listaServicios.forEach(({ nombre, img, precio, id }) => {
 
-        let cardServicio = document.createElement("div") 
+        let cardServicio = document.createElement("div")
         cardServicio.className = "cardServicio col-sm-12 col-md-12 col-lg 12 col-xl-3 col-xxl-3"
-        cardServicio.innerHTML = 
-        `<h3>${elem.nombre}</h3>
-        <img class="imgCard" src=${elem.img}>
-        <p>Precio: $ ${elem.precio}</p>
-        <button id=${elem.id} class="btnAgregar">Añadir</button>`
+        cardServicio.innerHTML =
+            `<h3>${nombre}</h3>
+        <img class="imgCard" src=${img}>
+        <p>Precio: $ ${precio}</p>
+        <button id=${id} class="btnAgregar">Añadir</button>`
 
         menuServicios.append(cardServicio)
-        let button = document.getElementById(elem.id)
+        let button = document.getElementById(id)
 
         button.addEventListener("click", agregarACarrito)
         button.addEventListener("click", seAgrego)
-        })
+    })
 }
 
-let carritoInicio = document.getElementById("carritoDOM")
+let carritoInicio = document.getElementById("listadoDOM")
 let carrito = []
 
 if (localStorage.getItem("carritoLocal")) {
-    carrito = JSON.parse (localStorage.getItem("carritoLocal"))
+    carrito = JSON.parse(localStorage.getItem("carritoLocal"))
     renderizarCarrito(carrito)
 }
 
 function seAgrego() {
-    alert ("Servicio Añadido Correctamente.")
+    alert("Servicio Añadido Correctamente.")
 }
 
 function renderizarCarrito(menuServicios) {
     carritoInicio.innerHTML = ""
-    menuServicios.forEach(elem => {
+    menuServicios.forEach(({ nombre, img, precio, id }) => {
         carritoInicio.innerHTML += `SE AGREGO: <p>${elem.nombre} Subtotal: $ ${el.subtotal}<p>`
     })
 }
-/*function AgregarACarrito (e){
-    let 
+function agregarACarrito(e) {
+    let buscadoCarrito = servicios.find(({ nombre, img, precio, id }) => id === Number(e.target.id))
+    carrito.push({
+        nombre: buscadoCarrito.nombre,
+        precio: buscadoCarrito.precio,
+        subtotal: buscadoCarrito.precio,
+    })
+
 }
 /*class servcio {
     constructor (pn, servicio, descripcion, precio) {
