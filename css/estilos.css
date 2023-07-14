@@ -8,4 +8,55 @@
 h1 {
   color: white;
   size: 10%;
+}
+
+.cardServicio {
+  border: 2px solid rgb(116, 108, 108);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  padding: 15px;
+  border-radius: 10px;
+}
+.cardServicio .btnAgregar {
+  background-color: rgba(248, 248, 243, 0.842);
+  color: black;
+  border-radius: 10px;
+  padding: 5px;
+  font-weight: bold;
+  border: 5px solid rgba(207, 207, 49, 0.842);
+}
+
+h3 {
+  text-align: center;
+}
+
+p {
+  text-align: center;
+}
+
+.imgCard {
+  width: 200px;
+  height: 200px;
+  background-position: center;
+  background-size: contain;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#carritoDOM {
+  border: 10px solid white;
+  border-radius: 10px;
+  width: 50%;
+  height: 100%;
+}
+
+.formatoRegYSes {
+  width: 400px;
+  height: 270px;
+  border: 5px solid white;
+  border-radius: 8px;
+  margin: 30px;
+  padding: 15px;
 }/*# sourceMappingURL=estilos.css.map */

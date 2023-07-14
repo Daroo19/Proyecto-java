@@ -1,13 +1,91 @@
 let servicios =[{
-    id: 1,
+    id: 11,
     title: "lavadero",
-    nombre: "lavado exterior",
+    nombre: "Lavado Exterior",
     precio: 3500,
-    img: "../Assets/Img/56a9f3d83ae58_thumb900.webp",
-}
-
+    img: "./Assets/img/autolavado.jpg"
+},
+{
+    id: 12,
+    title: "lavadero",
+    nombre: "Lavado Interior",
+    precio: 3500,
+    img: "./Assets/img/autolavado.jpg" 
+},
+{
+    id: 13,
+    title: "lavadero",
+    nombre: "Lavado Motor",
+    precio: 2500,
+    img: "./Assets/img/limpiar-motor-coche.jpg"
+},
+{
+    id: 14,
+    title: "Mecanica",
+    nombre: "Service Standard",
+    precio: 9400,
+    img: "./Assets/img/Mecanicagen.jpg"  
+},
+{
+    id: 15,
+    title: "Mecanica",
+    nombre: "Tren Delantero",
+    precio: 67000,
+    img: "./Assets/img/Mecanicagen.jpg" 
+},
+{
+    id: 16,
+    title: "Mecanica",
+    nombre: "Tren Trasero",
+    precio: 53000,
+    img: "./Assets/img/Mecanicagen.jpg"
+},
 ]
 
+rendeProducts(servicios)
+function rendeProducts(listaServicios) {
+    let menuServicios = document.getElementById ("menuServicios")
+    menuServicios.innerHTML = ""
+
+        listaServicios.forEach(elem => {
+
+        let cardServicio = document.createElement("div") 
+        cardServicio.className = "cardServicio col-sm-12 col-md-12 col-lg 12 col-xl-3 col-xxl-3"
+        cardServicio.innerHTML = 
+        `<h3>${elem.nombre}</h3>
+        <img class="imgCard" src=${elem.img}>
+        <p>Precio: $ ${elem.precio}</p>
+        <button id=${elem.id} class="btnAgregar">Añadir</button>`
+
+        menuServicios.append(cardServicio)
+        let button = document.getElementById(elem.id)
+
+        button.addEventListener("click", agregarACarrito)
+        button.addEventListener("click", seAgrego)
+        })
+}
+
+let carritoInicio = document.getElementById("carritoDOM")
+let carrito = []
+
+if (localStorage.getItem("carritoLocal")) {
+    carrito = JSON.parse (localStorage.getItem("carritoLocal"))
+    renderizarCarrito(carrito)
+}
+
+function seAgrego() {
+    alert ("Servicio Añadido Correctamente.")
+}
+
+function renderizarCarrito(menuServicios) {
+    carritoInicio.innerHTML = ""
+    menuServicios.forEach(elem => {
+        carritoInicio.innerHTML += `SE AGREGO: <p>${elem.nombre} Subtotal: $ ${el.subtotal}<p>`
+    })
+}
+/*function AgregarACarrito (e){
+    let 
+}
 /*class servcio {
     constructor (pn, servicio, descripcion, precio) {
         this.pn = pn;
