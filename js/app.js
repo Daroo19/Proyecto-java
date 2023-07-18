@@ -42,15 +42,15 @@ let servicios = [{
 },
 ]
 
-rendeProducts(servicios)
-function rendeProducts(listaServicios) {
+renderProducts(servicios)
+function renderProducts(listaServicios) {
     let menuServicios = document.getElementById("menuServicios")
     menuServicios.innerHTML = ""
 
     listaServicios.forEach(({ nombre, img, precio, id }) => {
 
         let cardServicio = document.createElement("div")
-        cardServicio.className = "cardServicio col-sm-12 col-md-12 col-lg 12 col-xl-3 col-xxl-3"
+        cardServicio.className = "cardServicio col-sm-12 col-md-12 col-lg-12 col-xl-3 col-xxl-3"
         cardServicio.innerHTML =
             `<h3>${nombre}</h3>
         <img class="imgCard" src=${img}>
@@ -80,18 +80,19 @@ function seAgrego() {
 function renderizarCarrito(menuServicios) {
     carritoInicio.innerHTML = ""
     menuServicios.forEach(({ nombre, img, precio, id }) => {
-        carritoInicio.innerHTML += `SE AGREGO: <p>${elem.nombre} Subtotal: $ ${el.subtotal}<p>`
+        carritoInicio.innerHTML += `SE AGREGO: <p>${nombre} Subtotal: $ ${subtotal}<p>`
     })
 }
 function agregarACarrito(e) {
-    let buscadoCarrito = servicios.find(({ nombre, img, precio, id }) => id === Number(e.target.id))
+    let buscadoCarrito = servicios.find(({ nombre, img, precio, id }) => id === Number(e.target.id));
     carrito.push({
-        nombre: buscadoCarrito.nombre,
-        precio: buscadoCarrito.precio,
-        subtotal: buscadoCarrito.precio,
-    })
-
-}
+      nombre: buscadoCarrito.nombre,
+      precio: buscadoCarrito.precio,
+      subtotal: buscadoCarrito.precio,
+    });
+  
+    localStorage.setItem("carritoLocal", JSON.stringify(carrito));
+  }
 /*class servcio {
     constructor (pn, servicio, descripcion, precio) {
         this.pn = pn;
