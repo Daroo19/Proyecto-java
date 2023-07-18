@@ -73,9 +73,20 @@ if (localStorage.getItem("carritoLocal")) {
     renderizarCarrito(carrito)
 }
 
-function seAgrego() {
-    alert("Servicio Añadido Correctamente.")
-}
+function agregarACarrito(e) {
+    let buscadoCarrito = servicios.find(({ nombre, img, precio, id }) => id === Number(e.target.id));
+    carrito.push({
+      nombre: buscadoCarrito.nombre,
+      precio: buscadoCarrito.precio,
+      subtotal: buscadoCarrito.precio,
+    })
+  
+    localStorage.setItem("carritoLocal", JSON.stringify(carrito));
+
+    renderizarCarrito(carrito)
+
+  }
+
 
 function renderizarCarrito(menuServicios) {
     carritoInicio.innerHTML = ""
@@ -83,16 +94,10 @@ function renderizarCarrito(menuServicios) {
         carritoInicio.innerHTML += `SE AGREGO: <p>${nombre} Subtotal: $ ${subtotal}<p>`
     })
 }
-function agregarACarrito(e) {
-    let buscadoCarrito = servicios.find(({ nombre, img, precio, id }) => id === Number(e.target.id));
-    carrito.push({
-      nombre: buscadoCarrito.nombre,
-      precio: buscadoCarrito.precio,
-      subtotal: buscadoCarrito.precio,
-    });
-  
-    localStorage.setItem("carritoLocal", JSON.stringify(carrito));
-  }
+function seAgrego() {
+    alert("Servicio Añadido Correctamente.")
+}
+
 /*class servcio {
     constructor (pn, servicio, descripcion, precio) {
         this.pn = pn;

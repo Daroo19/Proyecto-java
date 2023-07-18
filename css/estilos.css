@@ -10,6 +10,11 @@ h1 {
   size: 10%;
 }
 
+h2 {
+  color: white;
+  size: 1%;
+}
+
 .cardServicio {
   border: 2px solid rgb(116, 108, 108);
   display: flex;
