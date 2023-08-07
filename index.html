@@ -11,11 +11,17 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 
 <body>
     <header>
+        <div class="container-fluid">
+            <div class="row">
+                <h1 class="col-12 d-flex justify-content-center letter titleHeader">Mecanica NITRO!</h1>
+            </div>
+        </div>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 text-center">
@@ -25,6 +31,36 @@
         </div>
     </header>
     <main>
+        <section>
+            <div id="contenedorAcceso" class="d-flex justify-content-around flex-wrap">
+                <div id="registro">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <h2>Registrar nuevo usuario</h2>
+                            <label for=""><input type="email" placeholder="usuario" id="usuario" class="textoInput"><br> Ingrese su correo</label>
+                            <label for=""><input type="password" placeholder="contraseña" id="contraseña" class="textoInput"><br> Ingrese su contraseña</label>
+                        </div>
+                    </div>
+                </div>
+                <div id="Ingreso">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <h2>Iniciar Sesion</h2>
+                            <label for=""><input type="email" placeholder="usuario" id="usuarioInicio" class="textoInput"><br> Ingrese su correo</label>
+                            <label for=""><input type="password" placeholder="contraseña" id="contraseñaInicio" class="textoInput"><br> Ingrese su contraseña</label>
+                            <button id="inicio">Iniciar Sesion</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ocultar" id="serviciosNitro">
+                <div class="container-fluid">
+                    <div class="row">
+                        <h3 class="col-12 text-center d-flex justify-content-center letter h2Title">Servicios Brindados</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
         <section>
             <div id="tituloPag">
                 <div class="container-fluid">

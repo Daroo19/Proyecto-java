@@ -252,12 +252,67 @@ function registroError() {
   
     Swal.fire({
       icon: 'error',
-      title: 'Sus datos no son correctos.',
+      title: 'Los datos ingresados no son correctos.',
       background: 'rgb(116, 108, 108)',
       color: 'white'
   
     })
   
+  }
+
+  let buscador = document.getElementById ("barraSearch")
+  let inputBuscador = document.getElementById("inputSearch")
+
+  buscador.addEventListener("click", filtro)
+
+  function filtro(){
+    let filtro = servcios.filter ((({ nombre, img, precio, id }) => nombre.incldes(inputBuscador.value)))
+    renderProducts(filtrado)
+  }
+
+  let confirmarCompra = document.getElementById("Confirmar")
+  let vaciarCarrito = document.getElementById("Vaciar Carro")
+
+  confirmarCompra.addEventListener("click", confirmar)
+  vaciarCarrito.addEventListener("click", vaciar)
+
+  function confirmar() {
+    Toastify({
+      text: "Tu compra se realizo con exito!!",
+      duration: 2000,
+      close: false,
+      gravity: "top",
+      position: "center",
+      stopOnFocus: true,
+      style: {
+        background: "linear-gradient(90deg, rgba(3,6,98,1) 9%, rgba(4,15,156,1) 32%, rgba(14,27,207,1) 55%, rgba(37,51,233,1) 81%, rgba(61,71,242,1) 97%)",
+        weight: "bold",
+      }
+    }).showToast();
+
+    carritoInicio.innerHTML = ""
+    carrito = []
+    localStorage.removeItem("carritoLocal")
+  }
+
+  function vaciar() {
+    Toastify({
+      text: "Vaciaste el carrito.",
+      duration: 2000,
+      close: false,
+      gravity: "top",
+      position: "center",
+      stopOnFocus: true,
+      style: {
+        background: "red",
+    },
+    
+  }).showToast(); 
+
+    carritoInicio.innerHTML = "" 
+    carrito = []
+    localStorage.removeItem("carritoLocal")
+
   }
 }
 
