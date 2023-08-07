@@ -1,4 +1,4 @@
-let servicios = [{
+/*let servicios = [{
     id: 1,
     title: "lavadero",
     nombre: "Lavado Exterior",
@@ -40,8 +40,26 @@ let servicios = [{
     precio: 53000,
     img: "./assets/img/Mecanicagen.jpg"
 },
-]
+]*/
 
+fetch ("./data")
+  .then(res => res.json())
+  .then(servicios => {
+    api(servicios)
+  })
+    .catch((error) => 
+
+      Swal.fire({
+
+        icon: 'error',
+        title: 'Falla Servidor',
+        background: 'rgb(116, 108, 108)',
+        color: 'white'
+    
+      })
+    
+    )
+function api(servcios) {
 renderProducts(servicios)
 function renderProducts(listaServicios) {
     let menuServicios = document.getElementById("menuServicios")
@@ -74,12 +92,35 @@ if (localStorage.getItem("carritoLocal")) {
 }
 
 function agregarACarrito(e) {
-    let buscadoCarrito = servicios.find(({ nombre, img, precio, id }) => id === Number(e.target.id));
-    carrito.push({
-      nombre: buscadoCarrito.nombre,
-      precio: buscadoCarrito.precio,
-      subtotal: buscadoCarrito.precio,
-    })
+    let buscadoCarrito = servicios.find(({ nombre, img, precio, id }) => id === Number(e.target.id))
+    let position = servcios.findIndex(({ nombre, img, precio, id }) => id === Number(e.target.id))
+    
+    if (servcios[position].stock > 0) {
+        let spanId = document.getElementById("span" + e.target.id)
+        servcios[position].stock--
+        spanId.innerHTML = servcios[position].stock
+
+        if (carrito.some ((({ nombre, img, precio, id }) => id == buscadoCarrito.id))) {
+            let posicionServicio = carrito.findIndex((({ nombre, img, precio, id }) => id == buscadoCarrito.id))
+            carrito[posicionServicio].unidades++
+            carrito[posicionServicio].subtotal = carrito[posicionServicio].precio * carrito[posicionServicio].unidades
+        } else {
+            carrito.push({
+                nombre: buscadoCarrito.nombre,
+                precio: buscadoCarrito.precio,
+                subtotal: buscadoCarrito.precio,
+              })
+        }
+    } else {
+        Swal.fire({
+
+            icon: 'error',
+            title: 'No hay turnos disponibles',
+            background: 'rgb(116, 108, 108)',
+            color: 'white'
+        
+          })
+        }
   
     localStorage.setItem("carritoLocal", JSON.stringify(carrito));
 
@@ -87,15 +128,137 @@ function agregarACarrito(e) {
 
   }
 
+  function seAgrego() {
+
+    Toastify({
+  
+      text: "SE AGREGÓ AL CARRITO",
+      duration: 1500,
+      close: true,
+      gravity: "top",
+      position: "right",
+      stopOnFocus: true,
+      style: {
+        background: "linear-gradient(90deg, rgba(3,6,98,1) 9%, rgba(4,15,156,1) 32%, rgba(14,27,207,1) 55%, rgba(37,51,233,1) 81%, rgba(61,71,242,1) 97%)",
+      }
+      
+    }).showToast();
+  
+  }
+
 
 function renderizarCarrito(menuServicios) {
     carritoInicio.innerHTML = ""
+    let total = carrito.reduce ((acc,prod) => prod.subtotal, 0)
     menuServicios.forEach(({ nombre, img, precio, id }) => {
         carritoInicio.innerHTML += `SE AGREGO: <p>${nombre} Subtotal: $ ${subtotal}<p>`
     })
+    carritoInicio.innerHTML += `<span class="total">Su Total es: $ ${total}`
 }
-function seAgrego() {
-    alert("Servicio Añadido Correctamente.")
+
+let autenUsu = document.getElementById("autenUsu")
+let registroCliente = document.getElementById("registro")
+
+autenUsu.classList.add("claseUsuario")
+registroCliente.classList.add("claseUsuario")
+
+let containerRegSes = document.getElementById("containerResIni")
+let containerServicios = document.getElementById("serviciosNitro")
+let usuario = document.getElementById("usuario")
+let contraseña = document.getElementById("contraseña")
+let registro = document.getElementById("registro")
+
+registro.classList.add("btnUsuario")
+
+registro.addEventListener("click", () => {
+    console.log(usuario.value)
+    console.log(contraseña.value)
+
+    let informacion = {usuario: usuario.value, contrasenia: contrasenia.value}
+    let JSONinformacion = JSON.stringify (informacion)
+    localStorage.setItem("informacion", JSONinformacion)
+
+    if ((isNaN(usuario.value)) && contrasenia.value !== isNaN) {
+        registro() 
+
+      } else {
+        registroError()
+      }
+    
+})
+
+function registro(){
+
+    Swal.fire({
+        icon: 'success',
+        title: 'Registro completado correctamente.',
+        background: 'rgb(116, 108, 108)',
+        color: 'white'
+    
+      })
+}
+
+function registroError() {
+
+    Swal.fire({
+      icon: 'error',
+      title: 'Algo salio mal, intenta nuevamente.',
+      background: 'rgb(116, 108, 108)',
+      color: 'white'
+  
+    })
+  
+  }
+
+  let usuarioInicio = document.getElementById("usuarioInicio")
+  let contraseniaInicio = document.getElementById("contraseniaInicio")
+  let iniciarSesion = document.getElementById("inicio")
+
+  iniciarSesion.classList.add("btnUsuario")
+
+  registrarse.addEventListener("click", () => {
+    console.log(usuario.value)
+    console.log(contraseña.value)
+
+    let informacion = JSON.parse(localStorage.getItem("informacion"))
+
+    if (informacion.usuario == usuarioInicio.value && informacion.contraseña == contraseñaInicio.value) {
+  
+      Bienvenido()  
+      containerServicios.classList.remove("ocultar")
+      autenUsu.classList.add("ocultar")
+      registroCliente.classList.add("ocultar")
+  
+    } else {
+      inicioError()
+    }
+  })
+  
+  function Bienvenido() {
+  
+    Swal.fire({
+      title: 'Bienvenido al taller mecanico NITRO',
+      imageUrl: 'https://media.glamour.mx/photos/61904b932d97bd4c522a19cc/master/w_1600%2Cc_limit/269428.jpeg',
+      imageWidth: 400,
+      imageHeight: 200,
+      imageAlt: 'Custom image',
+      background: 'rgb(116, 108, 108)',
+      color: 'white'
+  
+    })
+  }
+  
+  function inicioError() {
+  
+    Swal.fire({
+      icon: 'error',
+      title: 'Sus datos no son correctos.',
+      background: 'rgb(116, 108, 108)',
+      color: 'white'
+  
+    })
+  
+  }
 }
 
 /*class servcio {

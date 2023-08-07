@@ -1,0 +1,43 @@
+[{
+    "id": 1,
+    "title": "lavadero",
+    "nombre": "Lavado Exterior",
+    "precio": 3500,
+    "img": "./assets/img/autolavado.jpg"
+},
+{
+    "id": 2,
+    "title": "lavadero",
+    "nombre": "Lavado Interior",
+    "precio": 3500,
+    "img": "./assets/img/autolavado.jpg"
+},
+{
+    "id": 3,
+    "title": "lavadero",
+    "nombre": "Lavado Motor",
+    "precio": 2500,
+    "img": "./assets/img/limpiar-motor-coche.jpg"
+},
+{
+    "id": 4,
+    "title": "Mecanica",
+    "nombre": "Service Standard",
+    "precio": 9400,
+    "img": "./assets/img/Mecanicagen.jpg"
+},
+{
+    "id": 5,
+    "title": "Mecanica",
+    "nombre": "Tren Delantero",
+    "precio": 67000,
+    "img": "./assets/img/Mecanicagen.jpg"
+},
+{
+    "id": 6,
+    "title": "Mecanica",
+    "nombre": "Tren Trasero",
+    "precio": 53000,
+    "img": "./assets/img/Mecanicagen.jpg"
+}
+]

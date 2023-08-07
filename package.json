@@ -1,0 +1,23 @@
+{
+  "name": "proyecto-java",
+  "version": "1.0.0",
+  "description": "proyect",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Daroo19/Proyecto-java.git#Proyecto-Final-JS"
+  },
+  "author": "Dario Zarate",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/Daroo19/Proyecto-java/issues"
+  },
+  "homepage": "https://github.com/Daroo19/Proyecto-java/tree/Proyecto-Final-JS#readme",
+  "devDependencies": {
+    "node-sass": "^9.0.0",
+    "react-toastify": "^9.1.3"
+  }
+}
