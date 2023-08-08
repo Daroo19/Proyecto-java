@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: rgb(255, 255, 255);
 }
 
 .bodyColor {
@@ -11,19 +10,7 @@
 
 .fuente {
   align-items: center;
-  color: white;
-}
-
-a {
-  text-decoration: none;
-}
-
-a .tituloHeader {
-  margin: 0;
-  font-size: 50px;
-  font-weight: 700;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  color: rgb(255, 255, 255);
 }
 
 .tituloHeader {
@@ -44,7 +31,7 @@ h2 {
   size: 1%;
 }
 
-.cardServicio {
+.cardsServicio {
   border: 2px solid rgb(116, 108, 108);
   display: flex;
   flex-direction: column;
@@ -52,9 +39,8 @@ h2 {
   margin: 20px;
   padding: 15px;
   border-radius: 10px;
-  color: white;
 }
-.cardServicio .btnAgregar {
+.cardsServicio .btnAgregar {
   background-color: rgba(248, 248, 243, 0.842);
   color: black;
   border-radius: 10px;
@@ -65,6 +51,7 @@ h2 {
 
 h3 {
   text-align: center;
+  color: white;
 }
 
 p {
@@ -119,7 +106,7 @@ p {
 }
 
 .textoInput {
-  color: black;
+  color: rgb(0, 0, 0);
 }
 
 .btnUsuario {

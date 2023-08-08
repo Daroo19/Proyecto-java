@@ -42,96 +42,98 @@
 },
 ]*/
 
-fetch ("./data")
+fetch("./data.json")
   .then(res => res.json())
   .then(servicios => {
     api(servicios)
   })
-    .catch((error) => 
+  .catch((error) =>
 
-      Swal.fire({
+    Swal.fire({
 
-        icon: 'error',
-        title: 'Falla Servidor',
-        background: 'rgb(116, 108, 108)',
-        color: 'white'
-    
-      })
-    
-    )
-function api(servcios) {
-renderProducts(servicios)
-function renderProducts(listaServicios) {
+      icon: 'error',
+      title: 'Falla Servidor',
+      background: 'rgb(116, 108, 108)',
+      color: 'white'
+
+    })
+
+  )
+function api(servicios) {
+  renderProducts(servicios)
+  function renderProducts(listaServicios) {
     let menuServicios = document.getElementById("menuServicios")
     menuServicios.innerHTML = ""
 
-    listaServicios.forEach(({ nombre, img, precio, id }) => {
+    listaServicios.forEach(el => {
 
-        let cardServicio = document.createElement("div")
-        cardServicio.className = "cardServicio col-sm-12 col-md-12 col-lg-12 col-xl-3 col-xxl-3"
-        cardServicio.innerHTML =
-            `<h3>${nombre}</h3>
-        <img class="imgCard" src=${img}>
-        <p>Precio: $ ${precio}</p>
-        <button id=${id} class="btnAgregar">Añadir</button>`
+      let cardServicio = document.createElement("div")
+      cardServicio.className = "cardsServicio col-sm-12 col-md-12 col-lg-12 col-xl-3 col-xxl-3"
+      cardServicio.innerHTML =
+        `<h3>${el.nombre}</h3>
+        <img class="imgCard" src=${el.img}>
+        <p>Turnos <span id="span${el.id}">${el.turno}</span> disponibles</p>
+        <p>Precio: $ ${el.precio}</p>
+        <button id=${el.id} class="btnAgregar">Añadir</button>`
 
-        menuServicios.append(cardServicio)
-        let button = document.getElementById(id)
+      menuServicios.append(cardServicio)
+      let button = document.getElementById(el.id)
 
-        button.addEventListener("click", agregarACarrito)
-        button.addEventListener("click", seAgrego)
+      button.addEventListener("click", agregarACarrito)
+      button.addEventListener("click", seAgrego)
     })
-}
+  }
 
-let carritoInicio = document.getElementById("listadoDOM")
-let carrito = []
+  let carritoInicio = document.getElementById("listadoDOM")
+  let carrito = []
 
-if (localStorage.getItem("carritoLocal")) {
+  if (localStorage.getItem("carritoLocal")) {
     carrito = JSON.parse(localStorage.getItem("carritoLocal"))
     renderizarCarrito(carrito)
-}
+  }
 
-function agregarACarrito(e) {
-    let buscadoCarrito = servicios.find(({ nombre, img, precio, id }) => id === Number(e.target.id))
-    let position = servcios.findIndex(({ nombre, img, precio, id }) => id === Number(e.target.id))
-    
-    if (servcios[position].stock > 0) {
-        let spanId = document.getElementById("span" + e.target.id)
-        servcios[position].stock--
-        spanId.innerHTML = servcios[position].stock
+  function agregarACarrito(e) {
+    let buscadoCarrito = servicios.find(el => el.id === Number(e.target.id))
+    let position = servicios.findIndex(el => el.id === Number(e.target.id))
 
-        if (carrito.some ((({ nombre, img, precio, id }) => id == buscadoCarrito.id))) {
-            let posicionServicio = carrito.findIndex((({ nombre, img, precio, id }) => id == buscadoCarrito.id))
-            carrito[posicionServicio].unidades++
-            carrito[posicionServicio].subtotal = carrito[posicionServicio].precio * carrito[posicionServicio].unidades
-        } else {
-            carrito.push({
-                nombre: buscadoCarrito.nombre,
-                precio: buscadoCarrito.precio,
-                subtotal: buscadoCarrito.precio,
-              })
-        }
+    if (servicios[position].turno > 0) {
+      let spanId = document.getElementById("span" + e.target.id)
+      servicios[position].turno--
+      spanId.innerHTML = servicios[position].turno
+
+      if (carrito.some((el => el.id == buscadoCarrito.id))) {
+        let posicionServicio = carrito.findIndex((el => el.id == buscadoCarrito.id))
+        carrito[posicionServicio].unidades++
+        carrito[posicionServicio].subtotal = carrito[posicionServicio].precio * carrito[posicionServicio].unidades
+      } else {
+        carrito.push({
+          id: buscadoCarrito.id,
+          nombre: buscadoCarrito.nombre,
+          precio: buscadoCarrito.precio,
+          unidades: 1,
+          subtotal: buscadoCarrito.precio,
+        })
+      }
     } else {
-        Swal.fire({
+      Swal.fire({
 
-            icon: 'error',
-            title: 'No hay turnos disponibles',
-            background: 'rgb(116, 108, 108)',
-            color: 'white'
-        
-          })
-        }
-  
+        icon: 'error',
+        title: 'No hay turnos disponibles',
+        background: 'rgb(116, 108, 108)',
+        color: 'white'
+
+      })
+    }
+
     localStorage.setItem("carritoLocal", JSON.stringify(carrito));
 
     renderizarCarrito(carrito)
-
   }
 
   function seAgrego() {
 
     Toastify({
-  
+
       text: "SE AGREGÓ AL CARRITO",
       duration: 1500,
       close: true,
@@ -141,72 +143,72 @@ function agregarACarrito(e) {
       style: {
         background: "linear-gradient(90deg, rgba(3,6,98,1) 9%, rgba(4,15,156,1) 32%, rgba(14,27,207,1) 55%, rgba(37,51,233,1) 81%, rgba(61,71,242,1) 97%)",
       }
-      
+
     }).showToast();
-  
+
   }
 
 
-function renderizarCarrito(menuServicios) {
+  function renderizarCarrito(listaServicios) {
     carritoInicio.innerHTML = ""
-    let total = carrito.reduce ((acc,prod) => prod.subtotal, 0)
-    menuServicios.forEach(({ nombre, img, precio, id }) => {
-        carritoInicio.innerHTML += `SE AGREGO: <p>${nombre} Subtotal: $ ${subtotal}<p>`
+    let total = carrito.reduce((acc, prod) => acc + prod.subtotal, 0)
+    listaServicios.forEach(el => {
+      carritoInicio.innerHTML += `SE AGREGO: <p>${el.nombre} Subtotal: $ ${el.subtotal}<p>`
     })
     carritoInicio.innerHTML += `<span class="total">Su Total es: $ ${total}`
-}
+  }
 
-let autenUsu = document.getElementById("autenUsu")
-let registroCliente = document.getElementById("registro")
+  let autenUsu = document.getElementById("autenUsu")
+  let registroCliente = document.getElementById("registro")
 
-autenUsu.classList.add("claseUsuario")
-registroCliente.classList.add("claseUsuario")
+  autenUsu.classList.add("claseUsuario")
+  registroCliente.classList.add("claseUsuario")
 
-let containerServicios = document.getElementById("serviciosNitro")
-let usuario = document.getElementById("usuario")
-let contrasenia = document.getElementById("contrasenia")
-let registrarse = document.getElementById("registrar")
+  let containerServicios = document.getElementById("serviciosNitro")
+  let usuario = document.getElementById("usuario")
+  let contrasenia = document.getElementById("contrasenia")
+  let registrarse = document.getElementById("registrar")
 
-registrarse.classList.add("btnUsuario")
+  registrarse.classList.add("btnUsuario")
 
-registrarse.addEventListener("click", () => {
+  registrarse.addEventListener("click", () => {
     console.log(usuario.value)
     console.log(contrasenia.value)
 
-    let informacion = {usuario: usuario.value, contrasenia: contrasenia.value}
-    let JSONinformacion = JSON.stringify (informacion)
+    let informacion = { usuario: usuario.value, contrasenia: contrasenia.value }
+    let JSONinformacion = JSON.stringify(informacion)
     localStorage.setItem("informacion", JSONinformacion)
 
     if ((isNaN(usuario.value)) && contrasenia.value !== isNaN) {
-        registro() 
+      registro()
 
-      } else {
-        registroError()
-      }
-    
-})
+    } else {
+      registroError()
+    }
 
-function registro(){
+  })
+
+  function registro() {
 
     Swal.fire({
-        icon: 'success',
-        title: 'Registro completado correctamente.',
-        background: 'rgb(116, 108, 108)',
-        color: 'white'
-    
-      })
-}
+      icon: 'success',
+      title: 'Registro completado correctamente.',
+      background: 'rgb(116, 108, 108)',
+      color: 'white'
 
-function registroError() {
+    })
+  }
+
+  function registroError() {
 
     Swal.fire({
       icon: 'error',
       title: 'Algo salio mal, intenta nuevamente.',
       background: 'rgb(116, 108, 108)',
       color: 'white'
-  
+
     })
-  
+
   }
 
   let usuarioInicio = document.getElementById("usuarioInicio")
@@ -215,65 +217,65 @@ function registroError() {
 
   iniciarSesion.classList.add("btnUsuario")
 
-  registrarse.addEventListener("click", () => {
-    console.log(usuario.value)
-    console.log(contrasenia.value)
+  iniciarSesion.addEventListener("click", () => {
+    console.log(usuarioInicio.value)
+    console.log(contraseniaInicio.value)
 
     let informacion = JSON.parse(localStorage.getItem("informacion"))
 
     if (informacion.usuario == usuarioInicio.value && informacion.contrasenia == contraseniaInicio.value) {
-  
-      Bienvenido()  
+
+      Bienvenido()
       containerServicios.classList.remove("ocultar")
       autenUsu.classList.add("ocultar")
       registroCliente.classList.add("ocultar")
-  
+
     } else {
       inicioError()
     }
   })
-  
+
   function Bienvenido() {
-  
+
     Swal.fire({
       title: 'Bienvenido al taller mecanico NITRO',
-      imageUrl: 'https://media.glamour.mx/photos/61904b932d97bd4c522a19cc/master/w_1600%2Cc_limit/269428.jpeg',
+      imageUrl: './assets/img/fachada taller.webp',
       imageWidth: 400,
       imageHeight: 200,
       imageAlt: 'Custom image',
       background: 'rgb(116, 108, 108)',
       color: 'white'
-  
+
     })
   }
-  
+
   function inicioError() {
-  
+
     Swal.fire({
       icon: 'error',
       title: 'Los datos ingresados no son correctos.',
       background: 'rgb(116, 108, 108)',
       color: 'white'
-  
+
     })
-  
+
   }
 
-  let buscador = document.getElementById ("btnSearch")
+  let buscador = document.getElementById("btnSearch")
   let inputBuscador = document.getElementById("inputSearch")
 
   buscador.addEventListener("click", filtro)
 
-  function filtro(){
-    let filtro = servicios.filter ((({ nombre, img, precio, id }) => nombre.incldes(inputBuscador.value)))
+  function filtro() {
+    let filtro = servicios.filter (el => el.nombre.includes(inputBuscador.value))
     renderProducts(filtro)
-  }
+}
 
-  let confirmarCompra = document.getElementById("Confirmar")
-  let vaciarCarrito = document.getElementById("Vaciar Carro")
+  let confirmarCompra = document.getElementById("comprar")
+  let vaciarCarrito = document.getElementById("vaciarCarro")
 
   confirmarCompra.addEventListener("click", confirmar)
-  vaciarCarrito.addEventListener("click", vaciar)
+  vaciarCarrito.addEventListener("click", vaciarCarro)
 
   function confirmar() {
     Toastify({
@@ -294,7 +296,7 @@ function registroError() {
     localStorage.removeItem("carritoLocal")
   }
 
-  function vaciar() {
+  function vaciarCarro() {
     Toastify({
       text: "Vaciaste el carrito.",
       duration: 2000,
@@ -304,11 +306,11 @@ function registroError() {
       stopOnFocus: true,
       style: {
         background: "red",
-    },
-    
-  }).showToast(); 
+      },
 
-    carritoInicio.innerHTML = "" 
+    }).showToast();
+
+    carritoInicio.innerHTML = ""
     carrito = []
     localStorage.removeItem("carritoLocal")
 
