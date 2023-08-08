@@ -2,8 +2,35 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: black
+    background-color: rgb(255, 255, 255)
+}
+
+.bodyColor {
+    background-color: black;
+}
+
+.fuente {
+    align-items: center;
+    color: white; 
+}
+
+a {
+    text-decoration: none; }
+    a .tituloHeader {
+      margin: 0;
+      font-size: 50px;
+      font-weight: 700;
+      padding-top: 15px;
+      padding-bottom: 15px; 
     }
+  
+.tituloHeader {
+    margin: 0;
+    font-size: 50px;
+    font-weight: 700;
+    padding-top: 15px;
+    padding-bottom: 15px; 
+}  
 
 h1 {
     color: white;
@@ -14,6 +41,8 @@ h2 {
     color: white;
     size: 1%;
 }
+
+  
 .cardServicio {
     
     border: 2px solid rgb(116, 108, 108);
@@ -37,19 +66,15 @@ h2 {
 }
 
 h3 {
-
     text-align: center;
-    color: white;
 }
 
 p {
-
     text-align: center;
     color: white;
 }
 
 .imgCard {
-
     width: 200px;
     height: 200px;
     background-position: center;
@@ -59,15 +84,34 @@ p {
 }
 
 #carritoDOM {
-
     border: 10px solid white;
     border-radius: 10px;
     width: 50%; 
     height: 100%;
-
 }
-.claseUsuario {
 
+.colorSearch {
+    background-color: rgba(248, 248, 243, 0.842);
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+    border: 5px solid rgba(207, 207, 49, 0.842);   
+}
+
+.btnSearch {
+    background-color: rgba(248, 248, 243, 0.842);
+    color: black;
+    padding: 10px;
+    margin-left: 15px;
+    border-radius: 10px;
+    border: 5px solid white;
+}
+
+.ocultar {
+    display: none;
+} 
+
+.claseUsuario {
     width: 400px;
     height: 270px;
     border: 5px solid white;
@@ -75,6 +119,20 @@ p {
     margin: 30px;
     padding: 15px;
 }
+
+.textoInput {
+    color: black;
+}
+
+.btnUsuario {
+    border: 5px solid white;
+    border-radius: 10px;
+    background-color: darkseagreen;
+    padding: 10px;
+    margin-top: 5px;
+    color: black;
+}
+
 .btnDOM {
     padding: 15px;
     width: 250px;

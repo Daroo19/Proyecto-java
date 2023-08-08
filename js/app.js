@@ -162,17 +162,16 @@ let registroCliente = document.getElementById("registro")
 autenUsu.classList.add("claseUsuario")
 registroCliente.classList.add("claseUsuario")
 
-let containerRegSes = document.getElementById("containerResIni")
 let containerServicios = document.getElementById("serviciosNitro")
 let usuario = document.getElementById("usuario")
-let contraseña = document.getElementById("contraseña")
-let registro = document.getElementById("registro")
+let contrasenia = document.getElementById("contrasenia")
+let registrarse = document.getElementById("registrar")
 
-registro.classList.add("btnUsuario")
+registrarse.classList.add("btnUsuario")
 
-registro.addEventListener("click", () => {
+registrarse.addEventListener("click", () => {
     console.log(usuario.value)
-    console.log(contraseña.value)
+    console.log(contrasenia.value)
 
     let informacion = {usuario: usuario.value, contrasenia: contrasenia.value}
     let JSONinformacion = JSON.stringify (informacion)
@@ -211,18 +210,18 @@ function registroError() {
   }
 
   let usuarioInicio = document.getElementById("usuarioInicio")
-  let contraseniaInicio = document.getElementById("contraseniaInicio")
+  let contraseniaInicio = document.getElementById("contraseñaInicio")
   let iniciarSesion = document.getElementById("inicio")
 
   iniciarSesion.classList.add("btnUsuario")
 
   registrarse.addEventListener("click", () => {
     console.log(usuario.value)
-    console.log(contraseña.value)
+    console.log(contrasenia.value)
 
     let informacion = JSON.parse(localStorage.getItem("informacion"))
 
-    if (informacion.usuario == usuarioInicio.value && informacion.contraseña == contraseñaInicio.value) {
+    if (informacion.usuario == usuarioInicio.value && informacion.contrasenia == contraseniaInicio.value) {
   
       Bienvenido()  
       containerServicios.classList.remove("ocultar")
@@ -260,14 +259,14 @@ function registroError() {
   
   }
 
-  let buscador = document.getElementById ("barraSearch")
+  let buscador = document.getElementById ("btnSearch")
   let inputBuscador = document.getElementById("inputSearch")
 
   buscador.addEventListener("click", filtro)
 
   function filtro(){
-    let filtro = servcios.filter ((({ nombre, img, precio, id }) => nombre.incldes(inputBuscador.value)))
-    renderProducts(filtrado)
+    let filtro = servicios.filter ((({ nombre, img, precio, id }) => nombre.incldes(inputBuscador.value)))
+    renderProducts(filtro)
   }
 
   let confirmarCompra = document.getElementById("Confirmar")
