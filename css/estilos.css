@@ -5,7 +5,7 @@
 }
 
 .bodyColor {
-  background-color: black;
+  background-color: rgba(109, 120, 151, 0.911);
 }
 
 .fuente {
@@ -107,6 +107,7 @@ p {
 
 .textoInput {
   color: rgb(0, 0, 0);
+  background-color: white;
 }
 
 .btnUsuario {
